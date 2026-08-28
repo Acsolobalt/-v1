@@ -1,30 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Дуэль
 {
-    public class Duel
+    class Duel
     {
         static public Random rand = new Random((int)DateTime.Now.Ticks);
         private string lastHeroMove; //атака.защита нанесено_урона
         private string lastEnemyMove; //атака.защита нанесено_урона
 
-        private CharControl _hero = new CharControl();
-        private CharControl _enemy = new CharControl();
+
 
         private int _heroHealth;
         private int _heroStamina;
+        private int _heroPower;
+        private int _heroAgility;
+        private int _heroIntelligence;
+        private int _heroLuck;
 
         private int _enemyHealth;
         private int _enemyStamina;
-
-        public CharControl Hero
-        {
-            get { return _hero; }
-        }
-        public CharControl Enemy
-        {
-            get { return _enemy; }
-        }
+        private int _enemyPower;
+        private int _enemyAgility;
+        private int _enemyIntelligence;
+        private int _enemyLuck;
 
         public int HeroHealth
         {
@@ -36,7 +38,22 @@ namespace Дуэль
             get { return _heroStamina; }
             set { _heroStamina = value; }
         }
-        
+        public int HeroPower
+        {
+            set { _heroPower = value; }
+        }
+        public int HeroAgility
+        {
+            set { _heroAgility = value; }
+        }
+        public int HeroIntelligence
+        {
+            set { _heroIntelligence = value; }
+        }
+        public int HeroLuck
+        {
+            set { _heroLuck = value; }
+        }
         public int EnemyHealth
         {
             get { return _enemyHealth; }
@@ -46,6 +63,22 @@ namespace Дуэль
         {
             get { return _enemyStamina; }
             set { _enemyStamina = value; }
+        }
+        public int EnemyPower
+        {
+            set { _enemyPower = value; }
+        }
+        public int EnemyAgility
+        {
+            set { _enemyAgility = value; }
+        }
+        public int EnemyIntelligence
+        {
+            set { _enemyIntelligence = value; }
+        }
+        public int EnemyLuck
+        {
+            set { _enemyLuck = value; }
         }
 
         public string LastHeroMove
@@ -64,13 +97,6 @@ namespace Дуэль
                 stamina = 0;
             }
         }
-        private void checkHealth(ref int health)
-        {
-            if (health < 0)
-            {
-                health = 0;
-            }
-        }
         public int krit(int luck)
         {
             int chance = rand.Next(0, 100) + 1;
@@ -87,7 +113,7 @@ namespace Дуэль
         {
             if(stamina == 0)
             {
-                return (double)rand.Next(4, 7)/10;
+                return rand.Next(4, 7)/10;
             } 
             else
             {
@@ -131,17 +157,12 @@ namespace Дуэль
         }
         public void makeAMove(int heroPos)
         {
-            int heroDamage = attackDamage(_hero.GetPower, ref _heroStamina, _hero.GetLuck, heroPos);
+            int heroDamage = attackDamage(_heroPower, ref _heroStamina, _heroLuck, heroPos);
             int enemyPos = rand.Next(1, 3);
-            int enemyDamage = attackDamage(_enemy.GetPower, ref _enemyStamina, _enemy.GetLuck, enemyPos);
+            int enemyDamage = attackDamage(_enemyPower, ref _enemyStamina, _enemyLuck, enemyPos);
 
-            int heroReceived = receivedDamage(enemyDamage, _hero.GetAgility, heroPos, _enemy.GetIntelligence, ref _heroStamina);
-            int enemyReceived = receivedDamage(heroDamage, _enemy.GetAgility, enemyPos, _hero.GetIntelligence, ref _enemyStamina);
-
-            _heroHealth -= heroReceived;
-            checkHealth(ref _heroHealth);
-            _enemyHealth -= enemyReceived;
-            checkHealth(ref _enemyHealth);
+            int heroReceived = receivedDamage(enemyDamage, _heroAgility, heroPos, _enemyIntelligence, ref _heroStamina);
+            int enemyReceived = receivedDamage(heroDamage, _enemyAgility, enemyPos, _heroIntelligence, ref _enemyStamina);
 
             lastHeroMove = "";
             if (heroPos == 1)
@@ -164,21 +185,6 @@ namespace Дуэль
                 lastEnemyMove += "защищается. ";
             }
             lastEnemyMove += "Нанесено урона: " + heroReceived;
-        }
-
-        public Duel(Character hero, int heroIndex, Character enemy)
-        {
-            lastEnemyMove = "";
-            lastHeroMove = "";
-
-            _hero.setCharacter(hero, heroIndex);
-            _enemy.setCharacter(enemy, -1);
-
-            _heroHealth = _hero.GetHealth;
-            _heroStamina = _hero.GetStamina;
-
-            _enemyHealth = _enemy.GetHealth;
-            _enemyStamina = _enemy.GetStamina;
         }
     }
 }
