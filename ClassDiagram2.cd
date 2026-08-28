@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Дуэль.GameControl">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABQAACAAggAAMAGAAAAAAAAAIAIAAAAAAIAAAAAAA=</HashCode>
+      <FileName>GameControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Дуэль.CharControl">
+    <Position X="4.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAABAABAAAAEAQAAAggAAFEAAIQQAAAIAIACAABAA=</HashCode>
+      <FileName>CharControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Дуэль.CharFactory">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAAA=</HashCode>
+      <FileName>CharFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
